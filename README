@@ -1,0 +1,7 @@
+StupidExpressDemo
+
+This repo only shows one simple nodejs demo.
+
+Express.js is used for web development. Jade is the template engine.
+
+All logic code is written in CoffeeScript.
