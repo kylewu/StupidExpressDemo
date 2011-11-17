@@ -1,0 +1,19 @@
+extends base
+
+block nav
+	a(href="/empty") New
+
+block content
+	ul
+		- if (mds.length)
+			- mds.forEach(function(md){
+				li(data-id="#{md.id}") #{md.name}
+			- })
+		- else
+			p oh no
+
+block script
+	script(src='/javascripts/index.js')
+block footer
+	a.coffeescript(href="http://jashkenas.github.com/coffee-script/")
+	a.nodejs(href="http://nodejs.org/")

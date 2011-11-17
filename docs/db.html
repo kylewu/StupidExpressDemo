@@ -1,0 +1,46 @@
+<!DOCTYPE html>  <html> <head>   <title>db.coffee</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="app.html">                 app.coffee               </a>                                           <a class="source" href="db.html">                 db.coffee               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               db.coffee             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="nv">fs = </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">)</span>
+
+<span class="nv">PATH = </span><span class="s1">&#39;/home/wenbin/data&#39;</span>
+
+<span class="nv">_get_json = </span><span class="o">-&gt;</span>
+	<span class="nv">fileContents = </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">PATH</span><span class="p">,</span> <span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
+	<span class="nv">schema = </span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">fileContents</span><span class="p">)</span>
+
+<span class="nv">_add_json = </span><span class="nf">(name, content)-&gt;</span>
+	<span class="nv">json = </span><span class="nx">_get_json</span><span class="p">()</span>
+	<span class="nx">json</span><span class="p">.</span><span class="nx">max</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="nx">json</span><span class="p">.</span><span class="nx">mds</span><span class="p">[</span><span class="nx">json</span><span class="p">.</span><span class="nx">max</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="nx">name</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="o">:</span><span class="nx">content</span><span class="p">}</span>
+	<span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="nx">PATH</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">json</span><span class="p">),</span> <span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
+	<span class="nx">json</span><span class="p">.</span><span class="nx">max</span>
+
+<span class="nv">_update_json = </span><span class="nf">(id, name, content)-&gt;</span>
+	<span class="nv">json = </span><span class="nx">_get_json</span><span class="p">()</span>
+	<span class="nv">md = </span><span class="nx">json</span><span class="p">.</span><span class="nx">mds</span><span class="p">[</span><span class="nx">id</span><span class="p">]</span>
+	<span class="nv">md.name = </span><span class="nx">name</span>
+	<span class="nv">md.content = </span><span class="nx">content</span>
+	<span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="nx">PATH</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">json</span><span class="p">),</span> <span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
+	<span class="nx">id</span>
+
+<span class="k">class</span> <span class="nx">MD</span>
+	<span class="nv">constructor: </span><span class="nf">(@id, @name, @content) -&gt;</span>
+
+	<span class="nv">save: </span><span class="o">-&gt;</span>
+		<span class="k">if</span> <span class="nx">@id</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Update</p>             </td>             <td class="code">               <div class="highlight"><pre>			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;ready to update&#39;</span>
+			<span class="nx">_update_json</span><span class="p">(</span><span class="nx">@id</span><span class="p">,</span> <span class="nx">@name</span><span class="p">,</span> <span class="nx">@content</span><span class="p">)</span>
+		<span class="k">else</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Insert </p>             </td>             <td class="code">               <div class="highlight"><pre>			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;ready to insert&#39;</span>
+			<span class="nx">_add_json</span><span class="p">(</span><span class="nx">@name</span><span class="p">,</span> <span class="nx">@content</span><span class="p">)</span>
+	
+	<span class="nv">get: </span><span class="nf">(id) -&gt;</span>
+		<span class="nv">md = </span><span class="nx">_get_json</span><span class="p">()[</span><span class="s1">&#39;mds&#39;</span><span class="p">][</span><span class="nx">id</span><span class="p">]</span>
+		<span class="vi">@name = </span><span class="nx">md</span><span class="p">.</span><span class="nx">name</span>
+		<span class="vi">@content = </span><span class="nx">md</span><span class="p">.</span><span class="nx">content</span>
+		<span class="err">@</span>
+	
+	<span class="nv">all: </span><span class="nf">()-&gt;</span>
+		<span class="nv">mds = </span><span class="nx">_get_json</span><span class="p">().</span><span class="nx">mds</span>
+		<span class="k">for</span> <span class="nx">k</span><span class="p">,</span><span class="nx">v</span> <span class="k">of</span> <span class="nx">mds</span>
+			<span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="nx">k</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="nx">v</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="o">:</span> <span class="nx">v</span><span class="p">.</span><span class="nx">content</span><span class="p">}</span>
+
+<span class="nv">module.exports = </span><span class="nx">MD</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

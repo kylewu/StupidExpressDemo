@@ -1,0 +1,26 @@
+extends base
+
+block css
+	link(rel='stylesheet', href='/stylesheets/pagedown.css')
+
+block nav
+	a.btn#btn-save(href="/save") Save
+	#async-success Success
+
+block content
+	#md-id #{mdid}
+
+	input#md-name(type="text")
+
+	#source
+		.wmd-panel
+			#wmd-button-bar
+			textarea.wmd-input#wmd-input This is the *first* editor.
+
+		#wmd-preview.wmd-panel.wmd-preview
+
+block script
+		script(src='/javascripts/pagedown/Markdown.Converter.js')
+		script(src='/javascripts/pagedown/Markdown.Editor.js')
+		script(src='/javascripts/pagedown/Markdown.Sanitizer.js')
+		script(src='/javascripts/md.js')

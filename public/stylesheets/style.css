@@ -1,0 +1,69 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+nav {
+  font-weight: bold;
+}
+
+nav a{
+  margin-left: 20px;
+  box-shadow: 0 0.07em 0.1em rgba(0, 0, 0, 0.3);
+  text-shadow: 0 -0.05em 0.1em #4C6074;
+  background: none repeat scroll 0 0 #5F7890;
+  padding: 5px 5px 5px 5px;
+  border-radius: 0.25em 0.25em 0.25em 0.25em;
+  color: #FFFFFF !important;
+}
+
+section{
+  margin: 20px;
+}
+a {
+  color: #00B7FF;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  background-color:#F9F9F9;
+  max-width: 600px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+li {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: #575757;
+  cursor: pointer;
+}
+
+li.hover {
+  background-color: #E8EEF7;
+}
+
+a.nodejs{
+  background: url("http://nodejs.org/logos/nodejs-black.png") no-repeat scroll left top transparent;
+  border-radius: 5px 5px 5px 5px;
+  height: 114px;
+  width: 212px;
+  display: block;
+}
+a.coffeescript{
+  background: url("http://jashkenas.github.com/coffee-script/documentation/images/logo.png") repeat scroll 0 0 transparent;
+  border-radius: 5px 5px 5px 5px;
+  height: 50px;
+  width: 225px;
+  display: block;
+}
+
+#md-id {
+  display:none;
+}
+#async-success {
+  display: inline;
+  padding-left: 50px;
+}
