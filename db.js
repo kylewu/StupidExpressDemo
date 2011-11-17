@@ -1,6 +1,6 @@
 var MD, PATH, fs, _add_json, _get_json, _update_json;
 fs = require('fs');
-PATH = '/home/wenbin/data';
+PATH = 'data';
 _get_json = function() {
   var fileContents, schema;
   fileContents = fs.readFileSync(PATH, 'utf8');

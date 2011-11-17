@@ -1,6 +1,6 @@
 fs = require('fs')
 
-PATH = '/home/wenbin/data'
+PATH = 'data'
 
 _get_json = ->
 	fileContents = fs.readFileSync(PATH, 'utf8')
